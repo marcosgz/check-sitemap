@@ -5,6 +5,7 @@ require 'nokogiri'
 require 'timeout'
 require 'uri'
 require 'rainbow'
+require 'openssl'
 
 require 'check_sitemap/version'
 require 'check_sitemap/errors'

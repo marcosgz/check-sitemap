@@ -3,12 +3,16 @@ class CheckSitemap::CheckURL
   def self.call(url)
     uri = URI.parse(url)
     h = Net::HTTP.new(uri.host, uri.port)
+    if uri.scheme == 'https'
+      h.use_ssl = true
+      h.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
 
     head = \
       begin
         Timeout::timeout(::CheckSitemap.config.timeout) do
           h.start do |ua|
-            ua.head(String(uri.path).size > 0 ? uri.path : '/')
+            ua.head(String(uri.path).empty? ? '/' : uri.path)
           end
         end
       rescue Timeout::Error
@@ -27,6 +31,5 @@ class CheckSitemap::CheckURL
     else
       puts "#{url} => #{Rainbow(head.code.to_s).indianred}"
     end
-
   end
 end
