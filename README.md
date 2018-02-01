@@ -20,9 +20,9 @@ Local filename:
     $ checksitemap path/to/sitemap.xml.gz # Yeah.. works also with gziped files(Remote or local)
 
 
-It process all the files included in the sitemap index. Use `--concurrence=<num threads>` to parallel process sitemap urls.
+It process all the files included in the sitemap index. Use `--concurrency=<num threads>` to parallel process sitemap urls.
 
-    $ checksitemap http://example.com/sitemap_index.xml --concurrence=5
+    $ checksitemap http://example.com/sitemap_index.xml --concurrency=5
 
 
 ## Contributing
