@@ -1,6 +1,6 @@
 # Check Sitemap
 
-`check-sitemap` is agem that pulls a sitemap and checks all of the URLs listed in it.
+`check-sitemap` is a gem that pulls a sitemap and checks all of the URLs listed in it.
 
 ## Installation
 
