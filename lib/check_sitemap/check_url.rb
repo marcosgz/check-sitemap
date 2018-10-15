@@ -1,3 +1,5 @@
+require 'net/http'
+
 class CheckSitemap::CheckURL
 
   def self.call(url)
