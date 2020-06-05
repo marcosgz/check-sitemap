@@ -2,7 +2,12 @@ require 'net/http'
 
 class CheckSitemap::CheckURL
 
-  def self.call(url)
+  def self.call(url, deep: 0)
+    if deep > 3
+      puts "#{url} => #{Rainbow('Deep').red}"
+      return
+    end
+
     uri = URI.parse(url)
     h = Net::HTTP.new(uri.host, uri.port)
     if uri.scheme == 'https'
@@ -25,7 +30,9 @@ class CheckSitemap::CheckURL
 
     case head.code.to_i
     when 301
-      puts "#{Rainbow(url).yellow} => redirect to #{Rainbow(head['location']).blue}"
+      location = head['location']
+      puts "#{Rainbow(url).yellow} => redirect to #{Rainbow(location).blue}"
+      call(location, deep: deep + 1)
     when 200
       puts "#{Rainbow(url).yellow} => #{Rainbow('OK').green}"
     when 404
